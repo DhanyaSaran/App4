@@ -1,0 +1,167 @@
+import React, { Component, useState, useEffect } from "react";
+const First = () => {
+  const [posts, setPosts] = useState(
+    "https://hn.algolia.com/api/v1/search_by_date?tags=story&page=0"
+  );
+  const [page, setPage] = useState(0);
+
+  const fetchNews = async () => {
+    fetch(posts, { method: "GET" })
+      .then((response) => response.json())
+      .then((responseData) => {
+        //set your data here
+        console.log(responseData);
+      });
+  };
+
+  /*   useEffect(()=>{
+     fetchNews()
+   },[posts]) 
+   */
+
+  useEffect(() => {
+    setInterval(() => {
+      handleChange(), 1000;
+    });
+  });
+
+  /*    const handleSubmit=e=>{
+    
+
+  //url with the pageno
+  setPosts(`https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${page}`)
+  fetchNews(posts)
+} */
+
+  const handleChange = (e) => {
+    //pageno
+
+    setPage(page + 1);
+    setPosts(
+      `https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${page}`
+    );
+   
+    //fetchNews()
+
+    fetchNews()
+  };
+
+  return (
+    <div className="App">
+      {/*  {loading?<h2>Loading...</h2>:""}
+     <form onSubmit={handleSubmit}>
+       <input type="text" value={searchQuery} onChange={handleChange}/>
+       <button>Search</button>
+       </form>
+ 
+       {
+         news.map((n,i)=>(
+           <p key={i}> {n.title} </p>
+         ))
+       } */}
+    </div>
+  );
+};
+
+export default First;
+
+
+
+
+
+//class Component
+
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+let check=false
+
+export default class Form extends React.Component
+{
+
+constructor()
+{
+    super()
+    this.state={
+        alldetails:[],
+        pageno:0
+    }
+}
+
+    componentDidMount(){
+       
+       //this.getDetails()
+       
+       }
+
+    
+       async getDetails(){
+
+        
+        this.timer =     setInterval(()=>
+        fetch(`https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${this.state.pageno}`,{method: "GET"})
+         .then((response) => response.json())
+         .then((responseData) =>
+         {
+           //set your data here
+            console.log(responseData);
+            console.log(this.timer)
+           //check=true
+           this.setState({
+            pageno:this.state.pageno+1
+        })
+         }
+         )
+         .catch((error) => {
+             console.error(error);
+         }), 1000)
+
+       
+       
+       }
+
+
+
+render()
+{
+    return(
+        <View>
+
+        </View>
+    )
+}
+
+}
+
+
+  exhaustiveNbHits: false
+exhaustiveTypo: true
+hits: Array(20)
+0: {created_at: '2021-10-24T10:06:15.000Z', title: '‘We don’t need to buy more stuff’: the people who kit out their homes for free', url: 'https://www.theguardian.com/money/2021/oct/23/buy-more-stuff-skips-freecycle-save-money', author: 'montalbano', points: 1, …}
+1: {created_at: '2021-10-24T10:02:47.000Z', title: 'Incentives in zero trust systems?', url: null, author: 'tetek', points: 1, …}
+2: {created_at: '2021-10-24T09:56:23.000Z', title: 'Ask HN: Anyone tried to break into making “products/services” for rich people?', url: null, author: 'mathverse', points: 1, …}
+3: {created_at: '2021-10-24T09:54:11.000Z', title: 'Offprint', url: 'https://en.wikipedia.org/wiki/Offprint', author: 'gone35', points: 1, …}
+4: {created_at: '2021-10-24T09:53:41.000Z', title: "Please don't call it Epoch Time", url: 'https://codeofmatt.com/please-dont-call-it-epoch-time/', author: 'kgraves', points: 1, …}
+5: {created_at: '2021-10-24T09:51:31.000Z', title: 'Google exec Peter Norvig challenges Berners-Lee (2006)', url: 'https://web.archive.org/web/20070105030625/http://…c+challenges+Berners-Lee/2100-1025_3-6095705.html', author: 'ColinWright', points: 1, …}
+6: {created_at: '2021-10-24T09:49:49.000Z', title: 'Supercharge Your Node.js with Rust', url: 'https://yieldcode.blog/supercharge-nodejs-with-rust/', author: 'skwee357', points: 2, …}
+7: {created_at: '2021-10-24T09:45:28.000Z', title: 'Marc Van Ranst – Communication and public engagement (in a pandemic)', url: 'https://eswi.org/eswi-tv/marc-van-ranst-communication-and-public-engagement/', author: 'charbonneau2', points: 1, …}
+8: {created_at: '2021-10-24T09:44:04.000Z', title: 'Arduino Terminal Does All the Characters', url: 'https://hackaday.com/2021/10/23/this-arduino-terminal-does-all-the-characters/', author: 'rcarmo', points: 1, …}
+9: {created_at: '2021-10-24T09:30:45.000Z', title: 'Climate Does Not Exist: AI tool to imagine climate change at your place', url: 'https://thisclimatedoesnotexist.com/', author: 'komape', points: 1, …}
+10: {created_at: '2021-10-24T09:29:39.000Z', title: 'M 6.2 – 21 km SSE of Yilan, Taiwan', url: 'https://earthquake.usgs.gov/earthquakes/eventpage/us6000fx56/executive', author: 'peter_retief', points: 1, …}
+11: {created_at: '2021-10-24T09:22:13.000Z', title: 'Facebook boss ‘not willing to protect public from harm’', url: 'https://www.theguardian.com/technology/2021/oct/24…book-boss-not-willing-to-protect-public-from-harm', author: 'luxpir', points: 2, …}
+12: {created_at: '2021-10-24T09:21:26.000Z', title: 'Enter third-wave economics: How the pandemic reshaped the dismal science', url: 'https://www.economist.com/briefing/2021/10/23/enter-third-wave-economics', author: 'helsinkiandrew', points: 1, …}
+13: {created_at: '2021-10-24T09:20:56.000Z', title: '8 Reasons Smart Engineers Use Frameworks – Even for Infrastructure', url: 'https://blog.cctechwiz.com/8-reasons-smart-engineers-use-frameworks-even-for-infrastructure', author: 'pst', points: 2, …}
+14: {created_at: '2021-10-24T09:18:14.000Z', title: 'Not Just a Cadbury Ad [video]', url: 'https://www.youtube.com/watch?v=VDWa8fZ4p1E', author: 'Magodo', points: 1, …}
+15: {created_at: '2021-10-24T09:16:07.000Z', title: 'Sybil Attack', url: 'https://en.wikipedia.org/wiki/Sybil_attack', author: 'manjana', points: 1, …}
+16: {created_at: '2021-10-24T09:11:50.000Z', title: 'Sony Imagines We’ll Live at Sea with Self-Sustaining Floating Habitats in 2050', url: 'https://designtaxi.com/news/416270/Sony-Imagines-W…a-With-Self-Sustaining-Floating-Habitats-In-2050/', author: 'vitabenes', points: 2, …}
+17: {created_at: '2021-10-24T09:08:33.000Z', title: 'The most brilliant bookshops in the world', url: 'https://www.ft.com/content/42bb3a0f-ba18-4dc7-ae8a-570fd989cbfc', author: 'ingve', points: 2, …}
+18: {created_at: '2021-10-24T09:06:46.000Z', title: 'Paris to Become 100% Cycling City Within Four Years, Reveals New Plan', url: 'https://www.forbes.com/sites/carltonreid/2021/10/2…-cycling-city-within-four-years-reveals-new-plan/', author: 'ingve', points: 29, …}
+19: {created_at: '2021-10-24T09:02:11.000Z', title: 'Barcelona’s Bicibús: hundreds of families biking to school together', url: 'https://www.npr.org/2021/10/22/1047341052/barcelona-bicibus-kids-parents-bike-ride-to-school', author: 'crousto', points: 1, …}
+length: 20
+[[Prototype]]: Array(0)
+hitsPerPage: 20
+nbHits: 1927875
+nbPages: 50
+page: 0
+params: "advancedSyntax=true&analytics=true&analyticsTags=backend&page=0&tags=story"
+processingTimeMS: 1
+query: ""
